@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres #This is how the spring-boot app calls it
+spec:
+  selector:
+    app: my-app
+    name: my-postgres
+  ports:
+    - port: 5432
+      targetPort: 5432

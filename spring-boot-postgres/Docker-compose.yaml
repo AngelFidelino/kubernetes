@@ -1,0 +1,36 @@
+version: "3.0"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    #restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=users
+    volumes:
+      - myVolume:/var/lib/postgresql/data
+      #- "/mnt/c/Users/angelfidelino.lopez/Documents/Fidelino/Myvolume:/var/lib/postgresql/data"
+      # /mnt/c/Users/angelfidelino.lopez/Documents/Fidelino/Myvolume
+      #  C:/Users/angelfidelino.lopez/Documents/Fidelino/Myvolume
+      #  C:\Users\angelfidelino.lopez\Documents\Fidelino\Myvolume
+      #  C:\\Users\\angelfidelino.lopez\\Documents\\Fidelino\\Myvolume
+      
+    networks:
+      - my-own-network
+  
+  demo:
+    image: demo:latest
+    ports:
+      - 8080:8080
+    networks:
+      - my-own-network
+    depends_on:
+      - postgres
+volumes:
+  myVolume:
+networks:
+  my-own-network:
+    
